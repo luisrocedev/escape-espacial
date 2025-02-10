@@ -1,0 +1,61 @@
+<a-scene physics="debug: true; gravity: -9.8">
+    <!-- Jugador con física aplicada -->
+    <a-entity id="player"
+        position="0 1.6 0"
+        dynamic-body="mass: 5; shape: capsule;"
+        movement-controls="speed: 0.1;">
+
+        <!-- Cámara del jugador con controles -->
+        <a-entity camera wasd-controls look-controls position="0 1.8 0">
+        </a-entity>
+    </a-entity>
+
+    <!-- Suelo con colisión -->
+    <a-plane id="ground" position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#222"
+    static-body></a-plane>
+
+    <!-- Paredes con colisión -->
+    <a-box position="0 2 -10" width="20" height="4" depth="0.2" color="#444" static-body></a-box>
+    <a-box position="-10 2 0" width="0.2" height="4" depth="20" color="#444" static-body></a-box>
+    <a-box position="10 2 0" width="0.2" height="4" depth="20" color="#444" static-body></a-box>
+    <a-box position="0 2 10" width="20" height="4" depth="0.2" color="#444" static-body></a-box>
+
+    <!-- Puerta con animación -->
+    <a-box id="puerta" position="0 2 -9.9" width="2" height="3" depth="0.1" color="#ff0000"
+        animation="property: position; to: 0 2 -11; dur: 1000; startEvents: abrirPuerta"
+        sound="src: #sonidoPuerta; on: abrirPuerta" static-body></a-box>
+
+    <!-- Tarjetas de acceso -->
+    <a-box id="tarjeta" position="-2 1 0" width="0.5" height="0.3" depth="0.1" color="#00ff00"
+        animation="property: scale; to: 0.6 0.4 0.2; dir: alternate; loop: true; dur: 1000"
+        sound="src: #sonidoTarjeta; on: tarjetaRecogida" static-body></a-box>
+
+    <a-box id="tarjetaLaser" position="2 1 0" width="0.5" height="0.3" depth="0.1" color="#0000ff"
+        animation="property: scale; to: 0.6 0.4 0.2; dir: alternate; loop: true; dur: 1000"
+        sound="src: #sonidoTarjeta; on: tarjetaLaserRecogida" static-body></a-box>
+
+    <!-- Láseres de seguridad -->
+    <a-entity id="laseres">
+        <a-box id="laser1" position="0 1.5 -2" width="4" height="0.2" depth="0.2" color="#ff0000"
+            animation="property: opacity; from: 1; to: 0.5; dir: alternate; loop: true; dur: 500"
+            static-body></a-box>
+        <a-box id="laser2" position="0 1 -2" width="4" height="0.2" depth="0.2" color="#ff0000"
+            animation="property: opacity; from: 1; to: 0.5; dir: alternate; loop: true; dur: 500"
+            static-body></a-box>
+    </a-entity>
+
+    <!-- Sonido Ambiental -->
+    <a-entity sound="src: #sonidoAmbiente; autoplay: true; loop: true; volume: 0.3"></a-entity>
+
+    <!-- Luces -->
+    <a-light type="ambient" intensity="0.5"></a-light>
+    <a-light id="luzDinamica" type="directional" position="3 5 -3" intensity="0.8" color="#ffffff"
+        animation="property: color; from: #ffffff; to: #ff6600; dir: alternate; loop: true; dur: 2000"></a-light>
+
+    <!-- Sonidos -->
+    <a-assets>
+        <audio id="sonidoTarjeta" src="assets/sounds/tarjeta.mp3"></audio>
+        <audio id="sonidoPuerta" src="assets/sounds/puerta.mp3"></audio>
+        <audio id="sonidoAmbiente" src="assets/sounds/ambiente.mp3"></audio>
+    </a-assets>
+</a-scene>
